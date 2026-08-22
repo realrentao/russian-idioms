@@ -1263,7 +1263,7 @@ def generate_index_html():
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>俄语习语 | 涛子办事处</title>
+<title>俄语习语 | logo涛子办事处</title>
 <style>
 {COMMON_CSS}
 {INDEX_CSS}
@@ -1301,7 +1301,7 @@ def generate_index_html():
 </div>
 
 <footer class="page-footer">
-    <p>涛子办事处 &bull; 俄语习语学习工具</p>
+    <p>logo涛子办事处</p>
 </footer>
 
 <button class="back-to-top" id="backToTop" onclick="window.scrollTo({{top:0,behavior:'smooth'}})">↑</button>
@@ -1557,7 +1557,7 @@ def generate_idiom_page(idiom):
 </div>
 
 <footer class="page-footer">
-    <p>涛子办事处 · 俄语习语学习工具 · #{iid:02d}/{len(IDIOMS)}</p>
+    <p>logo涛子办事处 · #{iid:02d}/{len(IDIOMS)}</p>
 </footer>
 
 <button class="back-to-top" id="backToTop" onclick="window.scrollTo({{top:0,behavior:'smooth'}})">↑</button>
