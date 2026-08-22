@@ -1,0 +1,1246 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>#06 Как с гуся вода | 俄语习语</title>
+<style>
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&family=Noto+Serif+SC:wght@400;600;700&display=swap');
+
+/* === Russian Idioms - Global Styles === */
+
+:root {
+    --ita-green: #0039A6;   /* repurposed: Russian blue */
+    --ita-white: #F5F5F0;
+    --ita-red: #D52B1E;     /* Russian red */
+    --gold: #C4A35A;
+    --gold-light: #F0E6C8;
+    --gold-dark: #A0813A;
+    --cream: #FDF8F0;
+    --warm-bg: #FAF6EE;
+    --card-bg: #FFFFFF;
+    --text-dark: #2C2416;
+    --text-mid: #6B5D4A;
+    --text-light: #9A8B75;
+    --shadow: 0 4px 20px rgba(0,0,0,0.08);
+    --shadow-hover: 0 8px 32px rgba(0,0,0,0.12);
+    --radius: 16px;
+    --radius-sm: 8px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: var(--warm-bg);
+    color: var(--text-dark);
+    line-height: 1.7;
+    min-height: 100vh;
+}
+
+/* Tricolor Header (Russian: blue-white-red) */
+.tricolor-bar {
+    height: 4px;
+    background: linear-gradient(90deg, var(--ita-green) 0%, var(--ita-green) 33.33%, var(--ita-white) 33.33%, var(--ita-white) 66.66%, var(--ita-red) 66.66%, var(--ita-red) 100%);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.15);
+}
+
+.main-header {
+    background: linear-gradient(135deg, #2C2416 0%, #4A3828 100%);
+    padding: 60px 20px 40px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.main-header::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at 30% 50%, rgba(196,163,90,0.08) 0%, transparent 50%),
+                radial-gradient(circle at 70% 50%, rgba(213,43,30,0.05) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+.main-header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.8rem;
+    color: var(--gold);
+    font-weight: 700;
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+    position: relative;
+}
+
+.main-header .subtitle {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.2rem;
+    color: var(--gold-light);
+    opacity: 0.8;
+    position: relative;
+}
+
+.main-header .subtitle-cn {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 1rem;
+    color: var(--text-light);
+    margin-top: 6px;
+    position: relative;
+}
+
+/* Footer */
+.page-footer {
+    background: linear-gradient(135deg, #2C2416 0%, #4A3828 100%);
+    color: var(--text-light);
+    text-align: center;
+    padding: 24px 20px;
+    font-size: 0.85rem;
+}
+
+/* Back to Top */
+.back-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--gold);
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 1.4rem;
+    box-shadow: var(--shadow);
+    transition: all 0.3s ease;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 999;
+}
+
+.back-to-top.visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.back-to-top:hover {
+    background: var(--gold-dark);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
+}
+
+/* Inline Play Button */
+.inline-play-btn {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    border: 1px solid var(--gold-light);
+    background: white;
+    color: var(--gold-dark);
+    font-size: 0.7rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-left: 4px;
+    padding: 0;
+    line-height: 1;
+    vertical-align: middle;
+}
+
+/* Translation Toggle Button */
+.trans-btn {
+    width: 24px;
+    height: 24px;
+    border-radius: 4px;
+    border: 1px solid var(--ita-green);
+    background: white;
+    color: var(--ita-green);
+    font-size: 0.65rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-left: 4px;
+    padding: 0;
+    line-height: 1;
+}
+
+.trans-btn:hover {
+    background: var(--ita-green);
+    color: white;
+}
+
+.trans-btn.active {
+    background: var(--ita-green);
+    color: white;
+}
+
+/* Translation Text (hidden by default) */
+.trans-text {
+    display: none;
+    font-size: 0.85rem;
+    color: var(--ita-green);
+    font-weight: 500;
+    padding: 6px 12px;
+    margin: 6px 0 2px 0;
+    background: rgba(0,57,166,0.05);
+    border-radius: var(--radius-sm);
+    border-left: 3px solid var(--ita-green);
+    line-height: 1.5;
+    width: 100%;
+    font-family: 'Noto Serif SC', serif;
+}
+
+.trans-text.visible {
+    display: block;
+}
+
+/* Align trans-text with the value text (after label), not the label itself */
+.meaning-item .trans-text {
+    margin-left: 78px;
+    width: calc(100% - 78px);
+}
+.meaning-item .trans-text.visible {
+    display: block;
+}
+
+.example-line .trans-text {
+    margin-left: 30px;
+    width: calc(100% - 30px);
+}
+.example-line .trans-text.visible {
+    display: block;
+}
+
+.inline-play-btn:hover {
+    background: var(--gold);
+    color: white;
+    border-color: var(--gold);
+    transform: scale(1.1);
+}
+
+.inline-play-btn.playing {
+    background: var(--ita-red);
+    color: white;
+    border-color: var(--ita-red);
+    animation: inlinePulse 0.8s infinite;
+}
+
+@keyframes inlinePulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(213,43,30,0.3); }
+    50% { box-shadow: 0 0 0 6px rgba(213,43,30,0); }
+}
+
+/* Speed Labels */
+.speed-label {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+/* ============ CSS Flags (emoji-free) ============ */
+.flag-icon {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    vertical-align: middle;
+}
+
+.flag-icon svg {
+    width: 1em;
+    height: 1em;
+    border-radius: 2px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+    flex-shrink: 0;
+}
+
+.flag-it svg { width: 1em; height: 1em; }
+.flag-cn svg { width: 1em; height: 1em; }
+.flag-en svg { width: 1em; height: 1em; }
+.flag-ru svg { width: 1em; height: 1em; }
+
+.flag-it .label,
+.flag-cn .label,
+.flag-en .label,
+.flag-ru .label {
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+@media (max-width: 768px) {
+    .main-header h1 { font-size: 2rem; }
+    .main-header .subtitle { font-size: 1rem; }
+    .main-header { padding: 50px 16px 30px; }
+}
+
+@media (max-width: 480px) {
+    .main-header h1 { font-size: 1.6rem; }
+}
+
+
+/* === Idiom Detail Page Styles === */
+.idiom-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 30px 20px 60px;
+}
+
+/* Breadcrumb */
+.breadcrumb {
+    font-size: 0.85rem;
+    color: var(--text-mid);
+    margin-bottom: 20px;
+    padding: 0 20px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.breadcrumb a {
+    color: var(--gold-dark);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.breadcrumb a:hover {
+    color: var(--gold);
+}
+
+/* Hero Section */
+.idiom-hero {
+    background: linear-gradient(135deg, #2C2416 0%, #4A3828 100%);
+    border-radius: var(--radius);
+    padding: 40px;
+    text-align: center;
+    margin-bottom: 28px;
+    position: relative;
+    overflow: hidden;
+}
+
+.idiom-hero::before {
+    content: '"';
+    position: absolute;
+    top: -20px;
+    left: 20px;
+    font-family: 'Playfair Display', serif;
+    font-size: 12rem;
+    color: rgba(196,163,90,0.08);
+    line-height: 1;
+}
+
+.idiom-hero::after {
+    content: '"';
+    position: absolute;
+    bottom: -80px;
+    right: 20px;
+    font-family: 'Playfair Display', serif;
+    font-size: 12rem;
+    color: rgba(196,163,90,0.08);
+    line-height: 1;
+}
+
+.idiom-hero .idiom-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.9rem;
+    color: var(--gold);
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+    position: relative;
+    z-index: 1;
+}
+
+.idiom-hero .idiom-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    color: white;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 10px;
+    position: relative;
+    z-index: 1;
+}
+
+.idiom-hero .idiom-meaning-cn {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 1.1rem;
+    color: var(--gold-light);
+    position: relative;
+    z-index: 1;
+}
+
+.idiom-hero .idiom-english {
+    font-style: italic;
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.5);
+    margin-top: 6px;
+    position: relative;
+    z-index: 1;
+}
+
+/* Audio Player */
+.audio-player {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    justify-content: center;
+    margin-top: 20px;
+    position: relative;
+    z-index: 1;
+    flex-wrap: wrap;
+}
+
+.audio-btn {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(255,255,255,0.15);
+    color: white;
+    font-size: 1.3rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(4px);
+}
+
+.audio-btn:hover {
+    background: var(--gold);
+    transform: scale(1.05);
+}
+
+.audio-btn.playing {
+    background: var(--ita-red);
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(213,43,30,0.4); }
+    50% { box-shadow: 0 0 0 12px rgba(213,43,30,0); }
+}
+
+.speed-buttons {
+    display: flex;
+    gap: 6px;
+}
+
+.speed-btn {
+    padding: 6px 14px;
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 20px;
+    background: transparent;
+    color: rgba(255,255,255,0.7);
+    font-size: 0.78rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.speed-btn:hover {
+    background: rgba(255,255,255,0.15);
+    color: white;
+}
+
+.speed-btn.active {
+    background: var(--gold);
+    color: white;
+    border-color: var(--gold);
+}
+
+/* Content Cards */
+.section-card {
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    margin-bottom: 20px;
+    overflow: hidden;
+    border: 1px solid rgba(196,163,90,0.15);
+}
+
+.section-header {
+    padding: 18px 24px;
+    font-family: 'Playfair Display', serif;
+    font-weight: 600;
+    font-size: 1.1rem;
+    border-bottom: 1px solid var(--gold-light);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.2s;
+}
+
+.section-header:hover {
+    background: rgba(196,163,90,0.05);
+}
+
+.section-header .icon {
+    font-size: 1.2rem;
+}
+
+.section-header .toggle-arrow {
+    margin-left: auto;
+    transition: transform 0.3s ease;
+    font-size: 0.9rem;
+    color: var(--text-light);
+}
+
+.section-header.collapsed .toggle-arrow {
+    transform: rotate(-90deg);
+}
+
+.section-body {
+    padding: 24px;
+    transition: all 0.3s ease;
+}
+
+.section-body.collapsed {
+    display: none;
+}
+
+/* Meaning Section */
+.meaning-item {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(196,163,90,0.1);
+}
+
+.meaning-item:last-child {
+    border-bottom: none;
+}
+
+.meaning-item .label {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--gold-dark);
+    min-width: 70px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.meaning-item .value {
+    font-size: 0.95rem;
+    color: var(--text-dark);
+    line-height: 1.6;
+    flex: 1;
+}
+
+.meaning-item .value.cn {
+    font-family: 'Noto Serif SC', serif;
+}
+
+/* Examples */
+.example-group {
+    background: var(--cream);
+    border-radius: var(--radius-sm);
+    padding: 16px 20px;
+    margin-bottom: 12px;
+}
+
+.example-line {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding: 4px 0;
+    font-size: 0.92rem;
+    line-height: 1.6;
+}
+
+.example-line .speaker {
+    font-weight: 600;
+    color: var(--ita-green);
+    min-width: 24px;
+}
+
+.example-line .speaker-b {
+    color: var(--ita-red);
+}
+
+.example-line .text {
+    color: var(--text-dark);
+    flex: 1;
+}
+
+/* Cultural Note */
+.cultural-note {
+    background: linear-gradient(135deg, var(--cream) 0%, #FFF 100%);
+    border-left: 3px solid var(--gold);
+    padding: 16px 20px;
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    font-size: 0.92rem;
+    line-height: 1.7;
+    color: var(--text-mid);
+}
+
+/* Exercises */
+.exercise-item {
+    padding: 16px 0;
+    border-bottom: 1px solid rgba(196,163,90,0.1);
+}
+
+.exercise-item:last-child {
+    border-bottom: none;
+}
+
+.exercise-q {
+    font-weight: 500;
+    margin-bottom: 10px;
+    font-size: 0.92rem;
+}
+
+.exercise-options {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 10px;
+}
+
+.exercise-opt {
+    padding: 8px 14px;
+    border: 1px solid var(--gold-light);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 0.88rem;
+    background: white;
+}
+
+.exercise-opt:hover {
+    border-color: var(--gold);
+    background: var(--cream);
+}
+
+.exercise-opt.selected {
+    border-color: var(--ita-green);
+    background: rgba(0,57,166,0.08);
+    font-weight: 500;
+}
+
+.exercise-opt.wrong {
+    border-color: var(--ita-red);
+    background: rgba(213,43,30,0.08);
+}
+
+.exercise-opt.correct {
+    border-color: var(--ita-green);
+    background: rgba(0,57,166,0.12);
+}
+
+.exercise-answer {
+    font-size: 0.85rem;
+    color: var(--ita-green);
+    font-weight: 500;
+    margin-top: 6px;
+    display: none;
+}
+
+.exercise-answer.show {
+    display: block;
+}
+
+.exercise-blank {
+    font-size: 0.9rem;
+    color: var(--text-dark);
+    margin: 8px 0;
+    padding: 10px 14px;
+    background: var(--cream);
+    border-radius: var(--radius-sm);
+    border: 1px dashed var(--gold-light);
+}
+
+.exercise-blank .fill-word {
+    color: var(--ita-red);
+    font-weight: 600;
+    cursor: pointer;
+    border-bottom: 2px dotted var(--ita-red);
+}
+
+.exercise-blank .fill-answer {
+    color: var(--ita-green);
+    font-weight: 600;
+}
+
+.reveal-btn {
+    padding: 8px 20px;
+    border: 1px solid var(--gold);
+    border-radius: 20px;
+    background: white;
+    color: var(--gold-dark);
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-top: 6px;
+}
+
+.reveal-btn:hover {
+    background: var(--gold);
+    color: white;
+}
+
+/* === Fill-in Typing Exercise === */
+.fill-exercise {
+    margin: 12px 0;
+}
+
+.fill-input-row {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.fill-input {
+    flex: 1;
+    min-width: 180px;
+    padding: 10px 14px;
+    border: 2px solid var(--gold-light);
+    border-radius: var(--radius-sm);
+    font-size: 0.95rem;
+    background: white;
+    color: var(--text-dark);
+    outline: none;
+    transition: all 0.2s ease;
+    font-family: 'Inter', sans-serif;
+}
+
+.fill-input:focus {
+    border-color: var(--gold);
+    box-shadow: 0 0 0 3px rgba(196,163,90,0.15);
+}
+
+.fill-input.correct {
+    border-color: var(--ita-green);
+    background: rgba(0,57,166,0.05);
+}
+
+.fill-input.wrong {
+    border-color: var(--ita-red);
+    background: rgba(213,43,30,0.05);
+}
+
+.fill-check-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: var(--radius-sm);
+    background: var(--ita-green);
+    color: white;
+    font-size: 0.88rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.fill-check-btn:hover {
+    background: #002a78;
+    transform: translateY(-1px);
+}
+
+.fill-feedback {
+    font-size: 0.85rem;
+    margin-top: 6px;
+    font-weight: 500;
+    padding: 4px 0;
+}
+
+.fill-feedback.correct {
+    color: var(--ita-green);
+}
+
+.fill-feedback.wrong {
+    color: var(--ita-red);
+}
+
+.fill-feedback.hint {
+    color: var(--gold-dark);
+}
+
+.fill-answer {
+    font-size: 0.88rem;
+    color: var(--ita-green);
+    font-weight: 600;
+    margin-top: 8px;
+    padding: 8px 14px;
+    background: rgba(0,57,166,0.06);
+    border-radius: var(--radius-sm);
+    border: 1px solid rgba(0,57,166,0.2);
+    display: none;
+}
+
+/* Navigation between idioms */
+.nav-idioms {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 12px;
+    margin: 28px auto;
+    max-width: 800px;
+    padding: 0 20px;
+}
+
+.nav-idioms .nav-btn.prev { justify-self: start; }
+.nav-idioms .nav-btn.next { justify-self: end; }
+.nav-idioms .nav-home { justify-self: center; }
+
+.nav-btn {
+    padding: 12px 24px;
+    border: 1px solid var(--gold-light);
+    border-radius: 50px;
+    text-decoration: none;
+    color: var(--text-dark);
+    font-size: 0.88rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    background: var(--card-bg);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.nav-btn:hover {
+    border-color: var(--gold);
+    background: var(--cream);
+    transform: translateY(-1px);
+}
+
+.nav-btn.next {
+    margin-left: auto;
+}
+
+.nav-btn.disabled {
+    opacity: 0.3;
+    pointer-events: none;
+}
+
+@media (max-width: 768px) {
+    .idiom-hero { padding: 30px 20px; }
+    .idiom-hero .idiom-text { font-size: 1.5rem; }
+    .section-header { padding: 14px 18px; font-size: 1rem; }
+    .section-body { padding: 18px; }
+    .nav-idioms { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+    .nav-idioms .nav-btn.prev { justify-self: auto; }
+    .nav-idioms .nav-btn.next { justify-self: auto; }
+    .nav-idioms .nav-home { justify-self: auto; }
+}
+
+@media (max-width: 480px) {
+    .idiom-hero { padding: 24px 16px; }
+    .idiom-hero .idiom-text { font-size: 1.25rem; }
+    .audio-player { gap: 8px; }
+    .idiom-container { padding: 20px 12px 40px; }
+}
+
+</style>
+</head>
+<body>
+
+<div class="tricolor-bar"></div>
+
+<header class="main-header" style="padding:50px 20px 30px;">
+    <h1 style="font-size:1.8rem;"><span class="flag-icon flag-ru"><svg width="1em" height="1em" viewBox="0 0 3 2" xmlns="http://www.w3.org/2000/svg"><rect width="3" height="2" fill="#FFFFFF"/><rect y="0.666" width="3" height="0.667" fill="#0039A6"/><rect y="1.333" width="3" height="0.667" fill="#D52B1E"/></svg></span> 俄语习语</h1>
+    <div class="subtitle" style="font-size:0.95rem;">Русские фразеологизмы и поговорки</div>
+</header>
+
+<div class="breadcrumb">
+    <a href="index.html">🏠 全部习语</a> / #06
+</div>
+
+<div class="idiom-container">
+
+    <!-- Hero -->
+    <div class="idiom-hero">
+        <div class="idiom-number">#06 · Характер</div>
+        <div class="idiom-text">Как с гуся вода</div>
+        <div class="idiom-meaning-cn">毫不在意 / 不当回事</div>
+        <div class="idiom-english">Like water off a duck's back</div>
+
+        <div class="audio-player">
+            <button class="audio-btn" id="playBtn" onclick="togglePlay()" title="播放">▶</button>
+            <div class="speed-buttons">
+                <button class="speed-btn" onclick="setSpeed(0.6, this)">0.6×</button>
+                <button class="speed-btn active" onclick="setSpeed(1.0, this)">1.0×</button>
+                <button class="speed-btn" onclick="setSpeed(1.4, this)">1.4×</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Meaning -->
+    <div class="section-card">
+        <div class="section-header" onclick="toggleSection(this)">
+            <span class="icon">📖</span> 含义 · Значение
+            <span class="toggle-arrow">▼</span>
+        </div>
+        <div class="section-body">
+            
+    <div class="meaning-item">
+        <span class="label"><span class="flag-icon flag-ru"><svg width="1em" height="1em" viewBox="0 0 3 2" xmlns="http://www.w3.org/2000/svg"><rect width="3" height="2" fill="#FFFFFF"/><rect y="0.666" width="3" height="0.667" fill="#0039A6"/><rect y="1.333" width="3" height="0.667" fill="#D52B1E"/></svg></span> 意思</span>
+        <span class="value">Кому-то всё нипочём, неприятности не задевают его.</span>
+        <button class="inline-play-btn" data-audio="meaning" title="朗读">▶</button>
+        <button class="trans-btn" onclick="toggleTrans(this)" title="中文译文">译</button>
+        <div class="trans-text">指某人对一切都不在乎，麻烦也伤不到他。</div>
+    </div>
+    <div class="meaning-item">
+        <span class="label"><span class="flag-icon flag-cn"><svg width="1em" height="1em" viewBox="0 0 30 20" xmlns="http://www.w3.org/2000/svg"><rect width="30" height="20" fill="#DE2910"/><polygon points="5.2,2.8 5.8,4.5 7.6,4.5 6.1,5.7 6.7,7.4 5.2,6.2 3.7,7.4 4.3,5.7 2.8,4.5 4.6,4.5" fill="#FFDE00"/><polygon points="12,3.6 12.3,4.5 13.2,4.5 12.5,5.1 12.8,6 12,5.4 11.2,6 11.5,5.1 10.8,4.5 11.7,4.5" fill="#FFDE00"/><polygon points="13.8,7.4 14.3,8.1 15.1,8 14.6,8.6 15,9.4 14.2,9.2 13.6,9.8 13.6,9 12.8,8.7 13.6,8.4" fill="#FFDE00"/><polygon points="12,10.8 12.5,11.5 13.3,11.3 12.8,12 13.2,12.8 12.4,12.5 11.8,13.1 11.8,12.3 11,12.1 11.8,11.8" fill="#FFDE00"/><polygon points="9.2,10.2 9.5,11 10.4,11 9.7,11.5 10,12.4 9.2,11.9 8.4,12.3 8.7,11.4 8,10.9 8.9,10.8" fill="#FFDE00"/></svg></span> 中文</span>
+        <span class="value cn">毫不在意 / 不当回事</span>
+    </div>
+    <div class="meaning-item">
+        <span class="label">📖 用法</span>
+        <span class="value">形容一个人对批评、麻烦或不快全然不放在心上，像水从鹅背滑落一样。</span>
+    </div>
+    <div class="meaning-item">
+        <span class="label"><span class="flag-icon flag-en"><svg width="1em" height="1em" viewBox="0 0 60 30" xmlns="http://www.w3.org/2000/svg"><clipPath id="s"><path d="M0,0 v30 h60 v-30 z"/></clipPath><clipPath id="t"><path d="M30,15 h30 v15 z v15 h-30 z h-30 v-15 z v-15 h30 z"/></clipPath><g clip-path="url(#s)"><path d="M0,0 v30 h60 v-30 z" fill="#012169"/><path d="M0,0 L60,30 M60,0 L0,30" stroke="#FFF" stroke-width="6"/><path d="M0,0 L60,30 M60,0 L0,30" stroke="#C8102E" stroke-width="2"/><path d="M30,0 v30 M0,15 h60" stroke="#FFF" stroke-width="10"/><path d="M30,0 v30 M0,15 h60" stroke="#C8102E" stroke-width="4"/></g></svg></span> 英语</span>
+        <span class="value" style="font-style:italic;color:var(--text-mid)">Like water off a duck's back</span>
+    </div>
+    
+        </div>
+    </div>
+
+    <!-- Examples -->
+    <div class="section-card">
+        <div class="section-header" onclick="toggleSection(this)">
+            <span class="icon">💬</span> 例句 · Примеры
+            <span class="toggle-arrow">▼</span>
+        </div>
+        <div class="section-body">
+            
+            <div class="example-group">
+                <div class="example-line">
+                    <span class="speaker ">А</span>
+                    <span class="text">Ему сделали замечание, а ему — как с гуся вода.</span>
+                    <button class="inline-play-btn" data-audio="ex-0" title="朗读">▶</button>
+                    <button class="trans-btn" onclick="toggleTrans(this)" title="中文译文">译</button>
+                    <div class="trans-text">他被批评了，却跟没事人一样。</div>
+                </div>
+                <div class="example-line">
+                    <span class="speaker speaker-b">Б</span>
+                    <span class="text">Ничего не чувствует, настоящий флегматик.</span>
+                    <button class="inline-play-btn" data-audio="ex-1" title="朗读">▶</button>
+                    <button class="trans-btn" onclick="toggleTrans(this)" title="中文译文">译</button>
+                    <div class="trans-text">一点都不往心里去，真是个淡定的人。</div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    <!-- Cultural Note -->
+    <div class="section-card">
+        <div class="section-header" onclick="toggleSection(this)">
+            <span class="icon">🏛️</span> 文化注释 · Культурный комментарий
+            <span class="toggle-arrow">▼</span>
+        </div>
+        <div class="section-body">
+            <div class="cultural-note">鹅的羽毛有油脂，水浇上去立刻滑落、一滴不沾。比喻不愉快的事对某人毫无影响，转眼就忘。相当于英语的「water off a duck's back」。</div>
+        </div>
+    </div>
+
+    <!-- Exercises -->
+    <div class="section-card">
+        <div class="section-header" onclick="toggleSection(this)">
+            <span class="icon">✍️</span> 练习 · Упражнения
+            <span class="toggle-arrow">▼</span>
+        </div>
+        <div class="section-body">
+            <div class="exercise-item"><div class="exercise-q">«Как с гуся вода» 形容对事情怎样的态度？</div><div class="exercise-options"><div class="exercise-opt" onclick="selectOption(this, 'A', 'B')">非常在意、难过</div><div class="exercise-opt" onclick="selectOption(this, 'B', 'B')">毫不在意、不当回事</div><div class="exercise-opt" onclick="selectOption(this, 'C', 'B')">认真反思</div><div class="exercise-opt" onclick="selectOption(this, 'D', 'B')">立刻报复</div></div><div class="exercise-answer" id="answer-0">✅ B) 毫不在意、不当回事</div></div><div class="exercise-item"><div class="exercise-q">Его ругали целый час, а ему ___________________________________.</div>
+            <div class="fill-exercise" id="fill-1">
+                <div class="fill-input-row">
+                    
+                    <input type="text" class="fill-input" id="fill-input-1-0" placeholder="第1个空" autocomplete="off" onkeydown="if(event.key==='Enter')checkFill(1)">
+                
+                    <button class="fill-check-btn" onclick="checkFill(1)">✓ 检查</button>
+                    <button class="reveal-btn" onclick="toggleFill(1)">👁 答案</button>
+                </div>
+                <div class="fill-feedback" id="fill-feedback-1"></div>
+                <div class="fill-answer" id="fill-answer-1" style="display:none">💡 как с гуся вода</div>
+            </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Navigation -->
+<div class="nav-idioms">
+    <a href="idiom-05.html" class="nav-btn prev">← #05</a>
+    <a href="index.html" class="nav-btn nav-home">🏠 导航</a>
+    <a href="idiom-07.html" class="nav-btn next">#07 →</a>
+</div>
+
+<footer class="page-footer">
+    <p>涛子办事处 · 俄语习语学习工具 · #06/100</p>
+</footer>
+
+<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+// === Audio System ===
+let currentAudio = null;
+let currentSpeed = 1.0;
+const idiomText = "Как с гуся вода";
+
+const audioUrl = 'audio/0JrQsNC6INGBINCz0YPRgdGPINCy0L7QtNCw.mp3';
+
+function togglePlay() {
+    const btn = document.getElementById('playBtn');
+    if (currentAudio && !currentAudio.paused) {
+        currentAudio.pause();
+        btn.textContent = '▶';
+        btn.classList.remove('playing');
+        return;
+    }
+    playIdiom(currentSpeed);
+}
+
+function playIdiom(speed) {
+    if (currentAudio) {
+        if (currentAudio.pause) currentAudio.pause();
+        if (currentAudio.src) currentAudio.src = '';
+        currentAudio = null;
+    }
+    currentSpeed = speed;
+    document.querySelectorAll('.inline-play-btn.playing').forEach(b => b.classList.remove('playing'));
+    const btn = document.getElementById('playBtn');
+    btn.textContent = '⏳';
+    btn.classList.remove('playing');
+
+    const audio = new Audio(audioUrl);
+    audio.preload = 'auto';
+    audio.playbackRate = speed;
+
+    function startPlay() {
+        audio.play().then(function() {
+            btn.textContent = '⏸';
+            btn.classList.add('playing');
+        }).catch(function() {
+            audio.addEventListener('loadeddata', function retry() {
+                audio.play().then(function() {
+                    btn.textContent = '⏸';
+                    btn.classList.add('playing');
+                }).catch(function() {
+                    btn.textContent = '▶';
+                    btn.classList.remove('playing');
+                });
+                audio.removeEventListener('loadeddata', retry);
+            });
+        });
+    }
+
+    audio.addEventListener('loadeddata', startPlay, {once: true});
+    audio.addEventListener('error', function() {
+        btn.textContent = '▶';
+        btn.classList.remove('playing');
+    });
+    audio.addEventListener('ended', function() {
+        btn.textContent = '▶';
+        btn.classList.remove('playing');
+    });
+
+    if (audio.readyState >= 2) {
+        startPlay();
+    }
+
+    currentAudio = audio;
+}
+
+function setSpeed(speed, btn) {
+    currentSpeed = speed;
+    document.querySelectorAll('.speed-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    if (currentAudio && !currentAudio.paused) {
+        playIdiom(speed);
+    }
+}
+
+// Inline text reader — each audio is an independent JSON file
+function playInlineText(key, btn) {
+    if (!btn) return;
+
+    if (btn.classList.contains('playing')) {
+        if (currentAudio) {
+            if (currentAudio.pause) currentAudio.pause();
+            if (currentAudio.src) currentAudio.src = '';
+        }
+        currentAudio = null;
+        btn.classList.remove('playing');
+        return;
+    }
+
+    if (currentAudio) {
+        if (currentAudio.pause) currentAudio.pause();
+        if (currentAudio.src) currentAudio.src = '';
+        currentAudio = null;
+    }
+    document.querySelectorAll('.inline-play-btn.playing').forEach(b => b.classList.remove('playing'));
+
+    btn.classList.add('playing');
+
+    const audioFile = 'data/idiom-06-audio-' + key + '.json';
+
+    fetch(audioFile)
+        .then(r => {
+            if (!r.ok) throw new Error('Not found');
+            return r.json();
+        })
+        .then(b64 => {
+            const audio = new Audio('data:audio/mp3;base64,' + b64);
+            audio.playbackRate = currentSpeed;
+
+            audio.onended = function() {
+                btn.classList.remove('playing');
+            };
+            audio.onerror = function() {
+                btn.classList.remove('playing');
+            };
+
+            audio.play().catch(function() {
+                btn.classList.remove('playing');
+            });
+            currentAudio = audio;
+        })
+        .catch(function() {
+            btn.classList.remove('playing');
+        });
+}
+
+// Click handler for inline play buttons
+document.addEventListener('click', function(e) {
+    const btn = e.target.closest('.inline-play-btn');
+    if (btn && btn.dataset.audio) {
+        e.stopPropagation();
+        e.preventDefault();
+        playInlineText(btn.dataset.audio, btn);
+    }
+});
+
+// Translation toggle
+function toggleTrans(btn) {
+    const trans = btn.nextElementSibling;
+    if (trans && trans.classList.contains('trans-text')) {
+        trans.classList.toggle('visible');
+        btn.classList.toggle('active');
+        btn.textContent = trans.classList.contains('visible') ? '×' : '译';
+    }
+}
+
+// Section toggle
+function toggleSection(header) {
+    header.classList.toggle('collapsed');
+    const body = header.nextElementSibling;
+    body.classList.toggle('collapsed');
+}
+
+// Exercise: select option
+function selectOption(el, letter, correctLetter) {
+    const parent = el.parentElement;
+    const options = parent.querySelectorAll('.exercise-opt');
+    const answerDiv = parent.nextElementSibling;
+
+    options.forEach(o => o.classList.remove('selected', 'wrong', 'correct'));
+    el.classList.add('selected');
+
+    if (letter === correctLetter) {
+        el.classList.add('correct');
+        answerDiv.classList.add('show');
+    } else {
+        el.classList.add('wrong');
+        options.forEach(o => {
+            if (o.textContent.startsWith(correctLetter + ')')) {
+                o.classList.add('correct');
+            }
+        });
+        setTimeout(() => answerDiv.classList.add('show'), 300);
+    }
+}
+
+// Exercise: fill-in with typing input (supports multiple blanks, Cyrillic-aware)
+function normalize(s) {
+    return s.toLowerCase().replace(/[^a-zа-яё\u00C0-\u024F]/g, '');
+}
+
+function checkFill(id) {
+    const fb = document.getElementById('fill-feedback-' + id);
+    const answerDiv = document.getElementById('fill-answer-' + id);
+    const correctAnswers = answerDiv.textContent.replace('💡 ', '').trim().split(' / ');
+
+    let allCorrect = true;
+    let hasInput = false;
+
+    for (let i = 0; i < correctAnswers.length; i++) {
+        const input = document.getElementById('fill-input-' + id + '-' + i);
+        if (!input) continue;
+        hasInput = true;
+        const userAnswer = normalize(input.value);
+        const correct = normalize(correctAnswers[i]);
+        if (userAnswer === correct) {
+            input.classList.add('correct');
+            input.classList.remove('wrong');
+        } else {
+            input.classList.add('wrong');
+            input.classList.remove('correct');
+            allCorrect = false;
+        }
+    }
+
+    if (!hasInput) {
+        fb.className = 'fill-feedback hint';
+        fb.textContent = '✏️ 请先输入你的答案';
+        return;
+    }
+
+    if (allCorrect) {
+        fb.className = 'fill-feedback correct';
+        fb.textContent = '✅ 正确！';
+    } else {
+        fb.className = 'fill-feedback wrong';
+        fb.textContent = '❌ 不对，再想想';
+    }
+}
+
+function toggleFill(id) {
+    const answerDiv = document.getElementById('fill-answer-' + id);
+    if (answerDiv.style.display === 'none' || answerDiv.style.display === '') {
+        answerDiv.style.display = 'block';
+        const correctAnswers = answerDiv.textContent.replace('💡 ', '').trim().split(' / ');
+        for (let i = 0; i < correctAnswers.length; i++) {
+            const input = document.getElementById('fill-input-' + id + '-' + i);
+            if (input) {
+                input.value = correctAnswers[i].trim();
+                input.classList.add('correct');
+                input.classList.remove('wrong');
+            }
+        }
+        document.getElementById('fill-feedback-' + id).className = 'fill-feedback correct';
+        document.getElementById('fill-feedback-' + id).textContent = '✅ 答案已填入';
+    } else {
+        answerDiv.style.display = 'none';
+    }
+}
+
+// Back to top
+window.addEventListener('scroll', function() {
+    document.getElementById('backToTop').classList.toggle('visible', window.scrollY > 300);
+});
+</script>
+
+</body>
+</html>

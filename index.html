@@ -1,0 +1,1379 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>俄语习语 | 涛子办事处</title>
+<style>
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&family=Noto+Serif+SC:wght@400;600;700&display=swap');
+
+/* === Russian Idioms - Global Styles === */
+
+:root {
+    --ita-green: #0039A6;   /* repurposed: Russian blue */
+    --ita-white: #F5F5F0;
+    --ita-red: #D52B1E;     /* Russian red */
+    --gold: #C4A35A;
+    --gold-light: #F0E6C8;
+    --gold-dark: #A0813A;
+    --cream: #FDF8F0;
+    --warm-bg: #FAF6EE;
+    --card-bg: #FFFFFF;
+    --text-dark: #2C2416;
+    --text-mid: #6B5D4A;
+    --text-light: #9A8B75;
+    --shadow: 0 4px 20px rgba(0,0,0,0.08);
+    --shadow-hover: 0 8px 32px rgba(0,0,0,0.12);
+    --radius: 16px;
+    --radius-sm: 8px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: var(--warm-bg);
+    color: var(--text-dark);
+    line-height: 1.7;
+    min-height: 100vh;
+}
+
+/* Tricolor Header (Russian: blue-white-red) */
+.tricolor-bar {
+    height: 4px;
+    background: linear-gradient(90deg, var(--ita-green) 0%, var(--ita-green) 33.33%, var(--ita-white) 33.33%, var(--ita-white) 66.66%, var(--ita-red) 66.66%, var(--ita-red) 100%);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.15);
+}
+
+.main-header {
+    background: linear-gradient(135deg, #2C2416 0%, #4A3828 100%);
+    padding: 60px 20px 40px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.main-header::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at 30% 50%, rgba(196,163,90,0.08) 0%, transparent 50%),
+                radial-gradient(circle at 70% 50%, rgba(213,43,30,0.05) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+.main-header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.8rem;
+    color: var(--gold);
+    font-weight: 700;
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+    position: relative;
+}
+
+.main-header .subtitle {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.2rem;
+    color: var(--gold-light);
+    opacity: 0.8;
+    position: relative;
+}
+
+.main-header .subtitle-cn {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 1rem;
+    color: var(--text-light);
+    margin-top: 6px;
+    position: relative;
+}
+
+/* Footer */
+.page-footer {
+    background: linear-gradient(135deg, #2C2416 0%, #4A3828 100%);
+    color: var(--text-light);
+    text-align: center;
+    padding: 24px 20px;
+    font-size: 0.85rem;
+}
+
+/* Back to Top */
+.back-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--gold);
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 1.4rem;
+    box-shadow: var(--shadow);
+    transition: all 0.3s ease;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 999;
+}
+
+.back-to-top.visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.back-to-top:hover {
+    background: var(--gold-dark);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
+}
+
+/* Inline Play Button */
+.inline-play-btn {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    border: 1px solid var(--gold-light);
+    background: white;
+    color: var(--gold-dark);
+    font-size: 0.7rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-left: 4px;
+    padding: 0;
+    line-height: 1;
+    vertical-align: middle;
+}
+
+/* Translation Toggle Button */
+.trans-btn {
+    width: 24px;
+    height: 24px;
+    border-radius: 4px;
+    border: 1px solid var(--ita-green);
+    background: white;
+    color: var(--ita-green);
+    font-size: 0.65rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-left: 4px;
+    padding: 0;
+    line-height: 1;
+}
+
+.trans-btn:hover {
+    background: var(--ita-green);
+    color: white;
+}
+
+.trans-btn.active {
+    background: var(--ita-green);
+    color: white;
+}
+
+/* Translation Text (hidden by default) */
+.trans-text {
+    display: none;
+    font-size: 0.85rem;
+    color: var(--ita-green);
+    font-weight: 500;
+    padding: 6px 12px;
+    margin: 6px 0 2px 0;
+    background: rgba(0,57,166,0.05);
+    border-radius: var(--radius-sm);
+    border-left: 3px solid var(--ita-green);
+    line-height: 1.5;
+    width: 100%;
+    font-family: 'Noto Serif SC', serif;
+}
+
+.trans-text.visible {
+    display: block;
+}
+
+/* Align trans-text with the value text (after label), not the label itself */
+.meaning-item .trans-text {
+    margin-left: 78px;
+    width: calc(100% - 78px);
+}
+.meaning-item .trans-text.visible {
+    display: block;
+}
+
+.example-line .trans-text {
+    margin-left: 30px;
+    width: calc(100% - 30px);
+}
+.example-line .trans-text.visible {
+    display: block;
+}
+
+.inline-play-btn:hover {
+    background: var(--gold);
+    color: white;
+    border-color: var(--gold);
+    transform: scale(1.1);
+}
+
+.inline-play-btn.playing {
+    background: var(--ita-red);
+    color: white;
+    border-color: var(--ita-red);
+    animation: inlinePulse 0.8s infinite;
+}
+
+@keyframes inlinePulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(213,43,30,0.3); }
+    50% { box-shadow: 0 0 0 6px rgba(213,43,30,0); }
+}
+
+/* Speed Labels */
+.speed-label {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+/* ============ CSS Flags (emoji-free) ============ */
+.flag-icon {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    vertical-align: middle;
+}
+
+.flag-icon svg {
+    width: 1em;
+    height: 1em;
+    border-radius: 2px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+    flex-shrink: 0;
+}
+
+.flag-it svg { width: 1em; height: 1em; }
+.flag-cn svg { width: 1em; height: 1em; }
+.flag-en svg { width: 1em; height: 1em; }
+.flag-ru svg { width: 1em; height: 1em; }
+
+.flag-it .label,
+.flag-cn .label,
+.flag-en .label,
+.flag-ru .label {
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+@media (max-width: 768px) {
+    .main-header h1 { font-size: 2rem; }
+    .main-header .subtitle { font-size: 1rem; }
+    .main-header { padding: 50px 16px 30px; }
+}
+
+@media (max-width: 480px) {
+    .main-header h1 { font-size: 1.6rem; }
+}
+
+
+/* === Index Page Specific Styles === */
+.search-bar {
+    max-width: 500px;
+    margin: -24px auto 40px;
+    padding: 0 20px;
+    position: relative;
+    z-index: 10;
+}
+
+.search-bar input {
+    width: 100%;
+    padding: 14px 20px 14px 48px;
+    border: 2px solid var(--gold-light);
+    border-radius: 50px;
+    font-size: 1rem;
+    background: var(--card-bg);
+    color: var(--text-dark);
+    outline: none;
+    transition: all 0.3s ease;
+    box-shadow: var(--shadow);
+}
+
+.search-bar input:focus {
+    border-color: var(--gold);
+    box-shadow: var(--shadow-hover);
+}
+
+.search-bar .search-icon {
+    position: absolute;
+    left: 36px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-light);
+    font-size: 1.1rem;
+}
+
+.idiom-grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px 60px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 20px;
+}
+
+.idiom-card {
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    padding: 24px;
+    box-shadow: var(--shadow);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    text-decoration: none;
+    display: block;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid transparent;
+}
+
+.idiom-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--ita-green), var(--gold), var(--ita-red));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.idiom-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-hover);
+    border-color: var(--gold-light);
+}
+
+.idiom-card:hover::before {
+    opacity: 1;
+}
+
+.idiom-card .card-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.8rem;
+    color: var(--gold);
+    font-weight: 600;
+    margin-bottom: 4px;
+    letter-spacing: 1px;
+}
+
+.idiom-card .card-idiom {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
+    color: var(--text-dark);
+    font-weight: 600;
+    margin-bottom: 6px;
+    line-height: 1.4;
+}
+
+.idiom-card .card-category {
+    font-size: 0.75rem;
+    color: var(--ita-red);
+    font-weight: 500;
+    margin-bottom: 8px;
+    letter-spacing: 0.5px;
+}
+
+.idiom-card .card-meaning {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 0.9rem;
+    color: var(--text-mid);
+    line-height: 1.5;
+}
+
+.idiom-card .card-hint {
+    font-size: 0.8rem;
+    color: var(--gold-dark);
+    margin-top: 10px;
+    font-style: italic;
+}
+
+/* No results */
+.no-results {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--text-light);
+    font-size: 1.1rem;
+    display: none;
+}
+
+/* Stats bar */
+.stats-bar {
+    max-width: 1200px;
+    margin: 0 auto 20px;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.stats-bar .count {
+    font-size: 0.9rem;
+    color: var(--text-mid);
+}
+
+.stats-bar .count strong {
+    color: var(--text-dark);
+    font-weight: 600;
+}
+
+.category-filters {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.category-tag {
+    padding: 4px 14px;
+    border-radius: 50px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    background: var(--card-bg);
+    border: 1px solid var(--gold-light);
+    color: var(--text-mid);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.category-tag:hover,
+.category-tag.active {
+    background: var(--gold);
+    color: white;
+    border-color: var(--gold);
+}
+
+@media (max-width: 768px) {
+    .idiom-grid {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 14px;
+        padding: 0 14px 40px;
+    }
+    .stats-bar { flex-direction: column; align-items: flex-start; }
+}
+
+@media (max-width: 480px) {
+    .idiom-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+</style>
+</head>
+<body>
+
+<div class="tricolor-bar"></div>
+
+<header class="main-header">
+    <h1><span class="flag-icon flag-ru"><svg width="1em" height="1em" viewBox="0 0 3 2" xmlns="http://www.w3.org/2000/svg"><rect width="3" height="2" fill="#FFFFFF"/><rect y="0.666" width="3" height="0.667" fill="#0039A6"/><rect y="1.333" width="3" height="0.667" fill="#D52B1E"/></svg></span> 俄语习语</h1>
+    <div class="subtitle">Русские фразеологизмы и поговорки</div>
+    <div class="subtitle-cn">常用俄语习语，轻松掌握地道表达</div>
+</header>
+
+<div class="search-bar">
+    <span class="search-icon">🔍</span>
+    <input type="text" id="searchInput" placeholder="搜索习语 / Найти фразеологизм..." oninput="filterIdioms()">
+</div>
+
+<div class="stats-bar">
+    <div class="count">共 <strong>100</strong> 个习语</div>
+    <div class="category-filters">
+        <span class="category-tag active" data-cat="all" onclick="filterByCategory('all', this)">全部</span>
+        <span class="category-tag" data-cat="время-и-судьба" onclick="filterByCategory('время-и-судьба', this)">Время и судьба 时间与命运</span>
+                <span class="category-tag" data-cat="дружба-и-отношения" onclick="filterByCategory('дружба-и-отношения', this)">Дружба и отношения 友谊与关系</span>
+                <span class="category-tag" data-cat="качество" onclick="filterByCategory('качество', this)">Качество 品质</span>
+                <span class="category-tag" data-cat="количество" onclick="filterByCategory('количество', this)">Количество 数量</span>
+                <span class="category-tag" data-cat="мудрость" onclick="filterByCategory('мудрость', this)">Мудрость 智慧</span>
+                <span class="category-tag" data-cat="осторожность" onclick="filterByCategory('осторожность', this)">Осторожность 谨慎</span>
+                <span class="category-tag" data-cat="правда-и-ложь" onclick="filterByCategory('правда-и-ложь', this)">Правда и ложь 真伪</span>
+                <span class="category-tag" data-cat="речь-и-поведение" onclick="filterByCategory('речь-и-поведение', this)">Речь и поведение 言行</span>
+                <span class="category-tag" data-cat="семья" onclick="filterByCategory('семья', this)">Семья 家庭</span>
+                <span class="category-tag" data-cat="труд-и-лень" onclick="filterByCategory('труд-и-лень', this)">Труд и лень 勤劳与懒惰</span>
+                <span class="category-tag" data-cat="характер" onclick="filterByCategory('характер', this)">Характер 性格</span>
+                <span class="category-tag" data-cat="человек" onclick="filterByCategory('человек', this)">Человек 人性</span>
+                <span class="category-tag" data-cat="чувства" onclick="filterByCategory('чувства', this)">Чувства 情感</span>
+                
+    </div>
+</div>
+
+<div class="idiom-grid" id="idiomGrid">
+    
+        <a href="idiom-01.html" class="idiom-card" data-category="человек" data-search="белая ворона 与众不同的人 / 格格不入的人">
+            <div class="card-number">#01</div>
+            <div class="card-idiom">Белая ворона</div>
+            <div class="card-category">Человек</div>
+            <div class="card-meaning">与众不同的人 / 格格不入的人</div>
+            <div class="card-hint">A white crow / An odd one out</div>
+        </a>
+        
+        <a href="idiom-02.html" class="idiom-card" data-category="речь-и-поведение" data-search="делать из мухи слона 小题大做 / 夸大其词">
+            <div class="card-number">#02</div>
+            <div class="card-idiom">Делать из мухи слона</div>
+            <div class="card-category">Речь и поведение</div>
+            <div class="card-meaning">小题大做 / 夸大其词</div>
+            <div class="card-hint">Make a mountain out of a molehill</div>
+        </a>
+        
+        <a href="idiom-03.html" class="idiom-card" data-category="характер" data-search="семь пятниц на неделе 反复无常 / 朝三暮四">
+            <div class="card-number">#03</div>
+            <div class="card-idiom">Семь пятниц на неделе</div>
+            <div class="card-category">Характер</div>
+            <div class="card-meaning">反复无常 / 朝三暮四</div>
+            <div class="card-hint">To be changeable / fickle</div>
+        </a>
+        
+        <a href="idiom-04.html" class="idiom-card" data-category="речь-и-поведение" data-search="водить за нос 牵着鼻子走 / 愚弄欺骗">
+            <div class="card-number">#04</div>
+            <div class="card-idiom">Водить за нос</div>
+            <div class="card-category">Речь и поведение</div>
+            <div class="card-meaning">牵着鼻子走 / 愚弄欺骗</div>
+            <div class="card-hint">To lead by the nose / pull someone's leg</div>
+        </a>
+        
+        <a href="idiom-05.html" class="idiom-card" data-category="речь-и-поведение" data-search="считать ворон 心不在焉 / 发呆走神">
+            <div class="card-number">#05</div>
+            <div class="card-idiom">Считать ворон</div>
+            <div class="card-category">Речь и поведение</div>
+            <div class="card-meaning">心不在焉 / 发呆走神</div>
+            <div class="card-hint">To be daydreaming / absent-minded</div>
+        </a>
+        
+        <a href="idiom-06.html" class="idiom-card" data-category="характер" data-search="как с гуся вода 毫不在意 / 不当回事">
+            <div class="card-number">#06</div>
+            <div class="card-idiom">Как с гуся вода</div>
+            <div class="card-category">Характер</div>
+            <div class="card-meaning">毫不在意 / 不当回事</div>
+            <div class="card-hint">Like water off a duck's back</div>
+        </a>
+        
+        <a href="idiom-07.html" class="idiom-card" data-category="человек" data-search="два сапога пара 半斤八两 / 一路货色">
+            <div class="card-number">#07</div>
+            <div class="card-idiom">Два сапога пара</div>
+            <div class="card-category">Человек</div>
+            <div class="card-meaning">半斤八两 / 一路货色</div>
+            <div class="card-hint">Two of a kind / birds of a feather</div>
+        </a>
+        
+        <a href="idiom-08.html" class="idiom-card" data-category="осторожность" data-search="семь раз отмерь, один раз отрежь 三思而后行 / 慎之又慎">
+            <div class="card-number">#08</div>
+            <div class="card-idiom">Семь раз отмерь, один раз отрежь</div>
+            <div class="card-category">Осторожность</div>
+            <div class="card-meaning">三思而后行 / 慎之又慎</div>
+            <div class="card-hint">Measure twice, cut once / look before you leap</div>
+        </a>
+        
+        <a href="idiom-09.html" class="idiom-card" data-category="мудрость" data-search="куй железо, пока горячо 趁热打铁">
+            <div class="card-number">#09</div>
+            <div class="card-idiom">Куй железо, пока горячо</div>
+            <div class="card-category">Мудрость</div>
+            <div class="card-meaning">趁热打铁</div>
+            <div class="card-hint">Strike while the iron is hot</div>
+        </a>
+        
+        <a href="idiom-10.html" class="idiom-card" data-category="мудрость" data-search="тише едешь, дальше будешь 宁静致远 / 稳扎稳打更长远">
+            <div class="card-number">#10</div>
+            <div class="card-idiom">Тише едешь, дальше будешь</div>
+            <div class="card-category">Мудрость</div>
+            <div class="card-meaning">宁静致远 / 稳扎稳打更长远</div>
+            <div class="card-hint">Slow and steady wins the race</div>
+        </a>
+        
+        <a href="idiom-11.html" class="idiom-card" data-category="мудрость" data-search="волков бояться — в лес не ходить 怕风险就别干 / 不入虎穴焉得虎子">
+            <div class="card-number">#11</div>
+            <div class="card-idiom">Волков бояться — в лес не ходить</div>
+            <div class="card-category">Мудрость</div>
+            <div class="card-meaning">怕风险就别干 / 不入虎穴焉得虎子</div>
+            <div class="card-hint">Nothing ventured, nothing gained</div>
+        </a>
+        
+        <a href="idiom-12.html" class="idiom-card" data-category="труд-и-лень" data-search="без труда не вынешь и рыбку из пруда 不劳无获">
+            <div class="card-number">#12</div>
+            <div class="card-idiom">Без труда не вынешь и рыбку из пруда</div>
+            <div class="card-category">Труд и лень</div>
+            <div class="card-meaning">不劳无获</div>
+            <div class="card-hint">No pain, no gain</div>
+        </a>
+        
+        <a href="idiom-13.html" class="idiom-card" data-category="правда-и-ложь" data-search="не всё то золото, что блестит 闪光的不都是金子">
+            <div class="card-number">#13</div>
+            <div class="card-idiom">Не всё то золото, что блестит</div>
+            <div class="card-category">Правда и ложь</div>
+            <div class="card-meaning">闪光的不都是金子</div>
+            <div class="card-hint">All that glitters is not gold</div>
+        </a>
+        
+        <a href="idiom-14.html" class="idiom-card" data-category="дружба-и-отношения" data-search="старый друг лучше новых двух 一个老朋友胜过两个新交">
+            <div class="card-number">#14</div>
+            <div class="card-idiom">Старый друг лучше новых двух</div>
+            <div class="card-category">Дружба и отношения</div>
+            <div class="card-meaning">一个老朋友胜过两个新交</div>
+            <div class="card-hint">An old friend is better than two new ones</div>
+        </a>
+        
+        <a href="idiom-15.html" class="idiom-card" data-category="мудрость" data-search="ум хорошо, а два лучше 集思广益 / 三个臭皮匠">
+            <div class="card-number">#15</div>
+            <div class="card-idiom">Ум хорошо, а два лучше</div>
+            <div class="card-category">Мудрость</div>
+            <div class="card-meaning">集思广益 / 三个臭皮匠</div>
+            <div class="card-hint">Two heads are better than one</div>
+        </a>
+        
+        <a href="idiom-16.html" class="idiom-card" data-category="мудрость" data-search="язык до киева доведёт 嘴能问路 / 多问不迷路">
+            <div class="card-number">#16</div>
+            <div class="card-idiom">Язык до Киева доведёт</div>
+            <div class="card-category">Мудрость</div>
+            <div class="card-meaning">嘴能问路 / 多问不迷路</div>
+            <div class="card-hint">A man's tongue can take him anywhere</div>
+        </a>
+        
+        <a href="idiom-17.html" class="idiom-card" data-category="правда-и-ложь" data-search="шила в мешке не утаишь 纸包不住火">
+            <div class="card-number">#17</div>
+            <div class="card-idiom">Шила в мешке не утаишь</div>
+            <div class="card-category">Правда и ложь</div>
+            <div class="card-meaning">纸包不住火</div>
+            <div class="card-hint">Truth will out / you can't hide the truth</div>
+        </a>
+        
+        <a href="idiom-18.html" class="idiom-card" data-category="мудрость" data-search="на ошибках учатся 吃一堑长一智">
+            <div class="card-number">#18</div>
+            <div class="card-idiom">На ошибках учатся</div>
+            <div class="card-category">Мудрость</div>
+            <div class="card-meaning">吃一堑长一智</div>
+            <div class="card-hint">Learn from one's mistakes</div>
+        </a>
+        
+        <a href="idiom-19.html" class="idiom-card" data-category="труд-и-лень" data-search="труд человека кормит, а лень портит 劳动养人，懒惰毁人">
+            <div class="card-number">#19</div>
+            <div class="card-idiom">Труд человека кормит, а лень портит</div>
+            <div class="card-category">Труд и лень</div>
+            <div class="card-meaning">劳动养人，懒惰毁人</div>
+            <div class="card-hint">Work feeds you, idleness ruins you</div>
+        </a>
+        
+        <a href="idiom-20.html" class="idiom-card" data-category="труд-и-лень" data-search="голод не тётка 饥饿不饶人 / 饿肚子可不是闹着玩的">
+            <div class="card-number">#20</div>
+            <div class="card-idiom">Голод не тётка</div>
+            <div class="card-category">Труд и лень</div>
+            <div class="card-meaning">饥饿不饶人 / 饿肚子可不是闹着玩的</div>
+            <div class="card-hint">Hunger is no joke</div>
+        </a>
+        
+        <a href="idiom-21.html" class="idiom-card" data-category="характер" data-search="задирать нос 趾高气扬 / 骄傲自大">
+            <div class="card-number">#21</div>
+            <div class="card-idiom">Задирать нос</div>
+            <div class="card-category">Характер</div>
+            <div class="card-meaning">趾高气扬 / 骄傲自大</div>
+            <div class="card-hint">To turn up one's nose / get a swelled head</div>
+        </a>
+        
+        <a href="idiom-22.html" class="idiom-card" data-category="правда-и-ложь" data-search="пускать пыль в глаза 炫耀 / 蒙蔽他人耳目">
+            <div class="card-number">#22</div>
+            <div class="card-idiom">Пускать пыль в глаза</div>
+            <div class="card-category">Правда и ложь</div>
+            <div class="card-meaning">炫耀 / 蒙蔽他人耳目</div>
+            <div class="card-hint">To throw dust in someone's eyes</div>
+        </a>
+        
+        <a href="idiom-23.html" class="idiom-card" data-category="речь-и-поведение" data-search="сесть в лужу 出丑 / 丢脸">
+            <div class="card-number">#23</div>
+            <div class="card-idiom">Сесть в лужу</div>
+            <div class="card-category">Речь и поведение</div>
+            <div class="card-meaning">出丑 / 丢脸</div>
+            <div class="card-hint">To make a fool of oneself</div>
+        </a>
+        
+        <a href="idiom-24.html" class="idiom-card" data-category="количество" data-search="кот наплакал 少得可怜 / 屈指可数">
+            <div class="card-number">#24</div>
+            <div class="card-idiom">Кот наплакал</div>
+            <div class="card-category">Количество</div>
+            <div class="card-meaning">少得可怜 / 屈指可数</div>
+            <div class="card-hint">Next to nothing / very little</div>
+        </a>
+        
+        <a href="idiom-25.html" class="idiom-card" data-category="труд-и-лень" data-search="бить баклуши 游手好闲 / 无所事事">
+            <div class="card-number">#25</div>
+            <div class="card-idiom">Бить баклуши</div>
+            <div class="card-category">Труд и лень</div>
+            <div class="card-meaning">游手好闲 / 无所事事</div>
+            <div class="card-hint">To loaf / twiddle one's thumbs</div>
+        </a>
+        
+        <a href="idiom-26.html" class="idiom-card" data-category="речь-и-поведение" data-search="метать бисер перед свиньями 对牛弹琴 / 明珠暗投">
+            <div class="card-number">#26</div>
+            <div class="card-idiom">Метать бисер перед свиньями</div>
+            <div class="card-category">Речь и поведение</div>
+            <div class="card-meaning">对牛弹琴 / 明珠暗投</div>
+            <div class="card-hint">Cast pearls before swine</div>
+        </a>
+        
+        <a href="idiom-27.html" class="idiom-card" data-category="человек" data-search="тёртый калач 老于世故的人 / 阅历丰富者">
+            <div class="card-number">#27</div>
+            <div class="card-idiom">Тёртый калач</div>
+            <div class="card-category">Человек</div>
+            <div class="card-meaning">老于世故的人 / 阅历丰富者</div>
+            <div class="card-hint">A seasoned person / old hand</div>
+        </a>
+        
+        <a href="idiom-28.html" class="idiom-card" data-category="количество" data-search="денег куры не клюют 钱多得数不清 / 有的是钱">
+            <div class="card-number">#28</div>
+            <div class="card-idiom">Денег куры не клюют</div>
+            <div class="card-category">Количество</div>
+            <div class="card-meaning">钱多得数不清 / 有的是钱</div>
+            <div class="card-hint">Rolling in money</div>
+        </a>
+        
+        <a href="idiom-29.html" class="idiom-card" data-category="качество" data-search="комар носа не подточит 无懈可击 / 挑不出毛病">
+            <div class="card-number">#29</div>
+            <div class="card-idiom">Комар носа не подточит</div>
+            <div class="card-category">Качество</div>
+            <div class="card-meaning">无懈可击 / 挑不出毛病</div>
+            <div class="card-hint">Nothing to cavil at / flawless</div>
+        </a>
+        
+        <a href="idiom-30.html" class="idiom-card" data-category="правда-и-ложь" data-search="с больной головы на здоровую 嫁祸于人 / 推卸责任">
+            <div class="card-number">#30</div>
+            <div class="card-idiom">С больной головы на здоровую</div>
+            <div class="card-category">Правда и ложь</div>
+            <div class="card-meaning">嫁祸于人 / 推卸责任</div>
+            <div class="card-hint">To shift the blame onto an innocent person</div>
+        </a>
+        
+        <a href="idiom-31.html" class="idiom-card" data-category="человек" data-search="мелкая сошка 小人物 / 无名之辈">
+            <div class="card-number">#31</div>
+            <div class="card-idiom">Мелкая сошка</div>
+            <div class="card-category">Человек</div>
+            <div class="card-meaning">小人物 / 无名之辈</div>
+            <div class="card-hint">A small fry / a nobody</div>
+        </a>
+        
+        <a href="idiom-32.html" class="idiom-card" data-category="человек" data-search="не лыком шит 不是草包 / 有本事（非等闲之辈）">
+            <div class="card-number">#32</div>
+            <div class="card-idiom">Не лыком шит</div>
+            <div class="card-category">Человек</div>
+            <div class="card-meaning">不是草包 / 有本事（非等闲之辈）</div>
+            <div class="card-hint">Not to be trifled with / no fool</div>
+        </a>
+        
+        <a href="idiom-33.html" class="idiom-card" data-category="человек" data-search="козёл отпущения 替罪羊">
+            <div class="card-number">#33</div>
+            <div class="card-idiom">Козёл отпущения</div>
+            <div class="card-category">Человек</div>
+            <div class="card-meaning">替罪羊</div>
+            <div class="card-hint">A scapegoat</div>
+        </a>
+        
+        <a href="idiom-34.html" class="idiom-card" data-category="человек" data-search="последняя спица в колесе 无足轻重的人 / 跑龙套">
+            <div class="card-number">#34</div>
+            <div class="card-idiom">Последняя спица в колесе</div>
+            <div class="card-category">Человек</div>
+            <div class="card-meaning">无足轻重的人 / 跑龙套</div>
+            <div class="card-hint">A small cog in the machine</div>
+        </a>
+        
+        <a href="idiom-35.html" class="idiom-card" data-category="человек" data-search="мокрая курица 窝囊废 / 没骨气的人">
+            <div class="card-number">#35</div>
+            <div class="card-idiom">Мокрая курица</div>
+            <div class="card-category">Человек</div>
+            <div class="card-meaning">窝囊废 / 没骨气的人</div>
+            <div class="card-hint">A weakling / spineless person</div>
+        </a>
+        
+        <a href="idiom-36.html" class="idiom-card" data-category="человек" data-search="мастер на все руки 多面手 / 万金油">
+            <div class="card-number">#36</div>
+            <div class="card-idiom">Мастер на все руки</div>
+            <div class="card-category">Человек</div>
+            <div class="card-meaning">多面手 / 万金油</div>
+            <div class="card-hint">A jack of all trades</div>
+        </a>
+        
+        <a href="idiom-37.html" class="idiom-card" data-category="речь-и-поведение" data-search="вешать лапшу на уши 糊弄 / 欺骗（给耳朵挂面条）">
+            <div class="card-number">#37</div>
+            <div class="card-idiom">Вешать лапшу на уши</div>
+            <div class="card-category">Речь и поведение</div>
+            <div class="card-meaning">糊弄 / 欺骗（给耳朵挂面条）</div>
+            <div class="card-hint">To pull the wool over someone's eyes</div>
+        </a>
+        
+        <a href="idiom-38.html" class="idiom-card" data-category="речь-и-поведение" data-search="бросать слова на ветер 空口白话 / 说话不算数">
+            <div class="card-number">#38</div>
+            <div class="card-idiom">Бросать слова на ветер</div>
+            <div class="card-category">Речь и поведение</div>
+            <div class="card-meaning">空口白话 / 说话不算数</div>
+            <div class="card-hint">Empty promises / hot air</div>
+        </a>
+        
+        <a href="idiom-39.html" class="idiom-card" data-category="речь-и-поведение" data-search="язык без костей 嘴没把门的 / 多嘴">
+            <div class="card-number">#39</div>
+            <div class="card-idiom">Язык без костей</div>
+            <div class="card-category">Речь и поведение</div>
+            <div class="card-meaning">嘴没把门的 / 多嘴</div>
+            <div class="card-hint">To have a loose tongue</div>
+        </a>
+        
+        <a href="idiom-40.html" class="idiom-card" data-category="речь-и-поведение" data-search="точить лясы 闲扯 / 说废话">
+            <div class="card-number">#40</div>
+            <div class="card-idiom">Точить лясы</div>
+            <div class="card-category">Речь и поведение</div>
+            <div class="card-meaning">闲扯 / 说废话</div>
+            <div class="card-hint">To shoot the breeze / chit-chat</div>
+        </a>
+        
+        <a href="idiom-41.html" class="idiom-card" data-category="речь-и-поведение" data-search="из песни слова не выкинешь 事实难改 / 一言既出">
+            <div class="card-number">#41</div>
+            <div class="card-idiom">Из песни слова не выкинешь</div>
+            <div class="card-category">Речь и поведение</div>
+            <div class="card-meaning">事实难改 / 一言既出</div>
+            <div class="card-hint">What's said is said</div>
+        </a>
+        
+        <a href="idiom-42.html" class="idiom-card" data-category="речь-и-поведение" data-search="лить воду на мельницу 推波助澜 / 助长（别人）">
+            <div class="card-number">#42</div>
+            <div class="card-idiom">Лить воду на мельницу</div>
+            <div class="card-category">Речь и поведение</div>
+            <div class="card-meaning">推波助澜 / 助长（别人）</div>
+            <div class="card-hint">To play into someone's hands</div>
+        </a>
+        
+        <a href="idiom-43.html" class="idiom-card" data-category="речь-и-поведение" data-search="ставить палки в колёса 使绊子 / 从中作梗">
+            <div class="card-number">#43</div>
+            <div class="card-idiom">Ставить палки в колёса</div>
+            <div class="card-category">Речь и поведение</div>
+            <div class="card-meaning">使绊子 / 从中作梗</div>
+            <div class="card-hint">To put a spanner in the works</div>
+        </a>
+        
+        <a href="idiom-44.html" class="idiom-card" data-category="речь-и-поведение" data-search="скатертью дорога 走好不送 / 悉听尊便">
+            <div class="card-number">#44</div>
+            <div class="card-idiom">Скатертью дорога</div>
+            <div class="card-category">Речь и поведение</div>
+            <div class="card-meaning">走好不送 / 悉听尊便</div>
+            <div class="card-hint">Good riddance</div>
+        </a>
+        
+        <a href="idiom-45.html" class="idiom-card" data-category="речь-и-поведение" data-search="попасть впросак 陷入窘境 / 出洋相">
+            <div class="card-number">#45</div>
+            <div class="card-idiom">Попасть впросак</div>
+            <div class="card-category">Речь и поведение</div>
+            <div class="card-meaning">陷入窘境 / 出洋相</div>
+            <div class="card-hint">To put one's foot in it</div>
+        </a>
+        
+        <a href="idiom-46.html" class="idiom-card" data-category="характер" data-search="горбатого могила исправит 江山易改本性难移">
+            <div class="card-number">#46</div>
+            <div class="card-idiom">Горбатого могила исправит</div>
+            <div class="card-category">Характер</div>
+            <div class="card-meaning">江山易改本性难移</div>
+            <div class="card-hint">A leopard can't change its spots</div>
+        </a>
+        
+        <a href="idiom-47.html" class="idiom-card" data-category="характер" data-search="душа нараспашку 胸怀坦荡 / 坦率">
+            <div class="card-number">#47</div>
+            <div class="card-idiom">Душа нараспашку</div>
+            <div class="card-category">Характер</div>
+            <div class="card-meaning">胸怀坦荡 / 坦率</div>
+            <div class="card-hint">Open-hearted / frank</div>
+        </a>
+        
+        <a href="idiom-48.html" class="idiom-card" data-category="характер" data-search="плыть по течению 随波逐流 / 随大流">
+            <div class="card-number">#48</div>
+            <div class="card-idiom">Плыть по течению</div>
+            <div class="card-category">Характер</div>
+            <div class="card-meaning">随波逐流 / 随大流</div>
+            <div class="card-hint">To go with the flow</div>
+        </a>
+        
+        <a href="idiom-49.html" class="idiom-card" data-category="характер" data-search="лезть в бутылку 发火 / 钻牛角尖">
+            <div class="card-number">#49</div>
+            <div class="card-idiom">Лезть в бутылку</div>
+            <div class="card-category">Характер</div>
+            <div class="card-meaning">发火 / 钻牛角尖</div>
+            <div class="card-hint">To fly off the handle</div>
+        </a>
+        
+        <a href="idiom-50.html" class="idiom-card" data-category="характер" data-search="упереться рогом 一根筋 / 固执己见">
+            <div class="card-number">#50</div>
+            <div class="card-idiom">Упереться рогом</div>
+            <div class="card-category">Характер</div>
+            <div class="card-meaning">一根筋 / 固执己见</div>
+            <div class="card-hint">To dig in one's heels</div>
+        </a>
+        
+        <a href="idiom-51.html" class="idiom-card" data-category="характер" data-search="как вкопанный 纹丝不动 / 呆若木鸡">
+            <div class="card-number">#51</div>
+            <div class="card-idiom">Как вкопанный</div>
+            <div class="card-category">Характер</div>
+            <div class="card-meaning">纹丝不动 / 呆若木鸡</div>
+            <div class="card-hint">Rooted to the spot</div>
+        </a>
+        
+        <a href="idiom-52.html" class="idiom-card" data-category="осторожность" data-search="смотреть в оба 提高警惕 / 留神">
+            <div class="card-number">#52</div>
+            <div class="card-idiom">Смотреть в оба</div>
+            <div class="card-category">Осторожность</div>
+            <div class="card-meaning">提高警惕 / 留神</div>
+            <div class="card-hint">To be on one's guard</div>
+        </a>
+        
+        <a href="idiom-53.html" class="idiom-card" data-category="осторожность" data-search="ходить на цыпочках 小心翼翼 / 蹑手蹑脚">
+            <div class="card-number">#53</div>
+            <div class="card-idiom">Ходить на цыпочках</div>
+            <div class="card-category">Осторожность</div>
+            <div class="card-meaning">小心翼翼 / 蹑手蹑脚</div>
+            <div class="card-hint">To tread carefully</div>
+        </a>
+        
+        <a href="idiom-54.html" class="idiom-card" data-category="осторожность" data-search="предупреждён — значит вооружён 有备无患">
+            <div class="card-number">#54</div>
+            <div class="card-idiom">Предупреждён — значит вооружён</div>
+            <div class="card-category">Осторожность</div>
+            <div class="card-meaning">有备无患</div>
+            <div class="card-hint">Forewarned is forearmed</div>
+        </a>
+        
+        <a href="idiom-55.html" class="idiom-card" data-category="осторожность" data-search="стелить соломку 未雨绸缪 / 事先铺垫">
+            <div class="card-number">#55</div>
+            <div class="card-idiom">Стелить соломку</div>
+            <div class="card-category">Осторожность</div>
+            <div class="card-meaning">未雨绸缪 / 事先铺垫</div>
+            <div class="card-hint">To prepare for a rainy day</div>
+        </a>
+        
+        <a href="idiom-56.html" class="idiom-card" data-category="мудрость" data-search="убить двух зайцев 一箭双雕 / 一举两得">
+            <div class="card-number">#56</div>
+            <div class="card-idiom">Убить двух зайцев</div>
+            <div class="card-category">Мудрость</div>
+            <div class="card-meaning">一箭双雕 / 一举两得</div>
+            <div class="card-hint">To kill two birds with one stone</div>
+        </a>
+        
+        <a href="idiom-57.html" class="idiom-card" data-category="мудрость" data-search="ломать голову 绞尽脑汁 / 苦思">
+            <div class="card-number">#57</div>
+            <div class="card-idiom">Ломать голову</div>
+            <div class="card-category">Мудрость</div>
+            <div class="card-meaning">绞尽脑汁 / 苦思</div>
+            <div class="card-hint">To rack one's brains</div>
+        </a>
+        
+        <a href="idiom-58.html" class="idiom-card" data-category="мудрость" data-search="знать как свои пять пальцев 了如指掌">
+            <div class="card-number">#58</div>
+            <div class="card-idiom">Знать как свои пять пальцев</div>
+            <div class="card-category">Мудрость</div>
+            <div class="card-meaning">了如指掌</div>
+            <div class="card-hint">To know like the back of one's hand</div>
+        </a>
+        
+        <a href="idiom-59.html" class="idiom-card" data-category="мудрость" data-search="на лету схватывать 一点就通 / 领悟快">
+            <div class="card-number">#59</div>
+            <div class="card-idiom">На лету схватывать</div>
+            <div class="card-category">Мудрость</div>
+            <div class="card-meaning">一点就通 / 领悟快</div>
+            <div class="card-hint">To catch on quickly</div>
+        </a>
+        
+        <a href="idiom-60.html" class="idiom-card" data-category="мудрость" data-search="клин клином вышибают 以毒攻毒">
+            <div class="card-number">#60</div>
+            <div class="card-idiom">Клин клином вышибают</div>
+            <div class="card-category">Мудрость</div>
+            <div class="card-meaning">以毒攻毒</div>
+            <div class="card-hint">To fight fire with fire</div>
+        </a>
+        
+        <a href="idiom-61.html" class="idiom-card" data-category="мудрость" data-search="москва не сразу строилась 功到自然成 / 罗马非一日建成">
+            <div class="card-number">#61</div>
+            <div class="card-idiom">Москва не сразу строилась</div>
+            <div class="card-category">Мудрость</div>
+            <div class="card-meaning">功到自然成 / 罗马非一日建成</div>
+            <div class="card-hint">Rome wasn't built in a day</div>
+        </a>
+        
+        <a href="idiom-62.html" class="idiom-card" data-category="мудрость" data-search="первый блин комом 万事开头难">
+            <div class="card-number">#62</div>
+            <div class="card-idiom">Первый блин комом</div>
+            <div class="card-category">Мудрость</div>
+            <div class="card-meaning">万事开头难</div>
+            <div class="card-hint">The first attempt is the hardest</div>
+        </a>
+        
+        <a href="idiom-63.html" class="idiom-card" data-category="мудрость" data-search="цыплят по осени считают 秋后算账 / 结果未定">
+            <div class="card-number">#63</div>
+            <div class="card-idiom">Цыплят по осени считают</div>
+            <div class="card-category">Мудрость</div>
+            <div class="card-meaning">秋后算账 / 结果未定</div>
+            <div class="card-hint">Don't count your chickens before they hatch</div>
+        </a>
+        
+        <a href="idiom-64.html" class="idiom-card" data-category="мудрость" data-search="читать между строк 读懂言外之意">
+            <div class="card-number">#64</div>
+            <div class="card-idiom">Читать между строк</div>
+            <div class="card-category">Мудрость</div>
+            <div class="card-meaning">读懂言外之意</div>
+            <div class="card-hint">To read between the lines</div>
+        </a>
+        
+        <a href="idiom-65.html" class="idiom-card" data-category="труд-и-лень" data-search="сидеть сложа руки 袖手旁观 / 游手好闲">
+            <div class="card-number">#65</div>
+            <div class="card-idiom">Сидеть сложа руки</div>
+            <div class="card-category">Труд и лень</div>
+            <div class="card-meaning">袖手旁观 / 游手好闲</div>
+            <div class="card-hint">To sit idle</div>
+        </a>
+        
+        <a href="idiom-66.html" class="idiom-card" data-category="труд-и-лень" data-search="спустя рукава 马马虎虎 / 敷衍了事">
+            <div class="card-number">#66</div>
+            <div class="card-idiom">Спустя рукава</div>
+            <div class="card-category">Труд и лень</div>
+            <div class="card-meaning">马马虎虎 / 敷衍了事</div>
+            <div class="card-hint">To do something slapdash</div>
+        </a>
+        
+        <a href="idiom-67.html" class="idiom-card" data-category="труд-и-лень" data-search="тянуть волынку 磨洋工 / 拖延">
+            <div class="card-number">#67</div>
+            <div class="card-idiom">Тянуть волынку</div>
+            <div class="card-category">Труд и лень</div>
+            <div class="card-meaning">磨洋工 / 拖延</div>
+            <div class="card-hint">To drag one's feet</div>
+        </a>
+        
+        <a href="idiom-68.html" class="idiom-card" data-category="труд-и-лень" data-search="засучив рукава 卷起袖子 / 干劲十足">
+            <div class="card-number">#68</div>
+            <div class="card-idiom">Засучив рукава</div>
+            <div class="card-category">Труд и лень</div>
+            <div class="card-meaning">卷起袖子 / 干劲十足</div>
+            <div class="card-hint">To roll up one's sleeves</div>
+        </a>
+        
+        <a href="idiom-69.html" class="idiom-card" data-category="труд-и-лень" data-search="толочь воду в ступе 白费力气 / 徒劳">
+            <div class="card-number">#69</div>
+            <div class="card-idiom">Толочь воду в ступе</div>
+            <div class="card-category">Труд и лень</div>
+            <div class="card-meaning">白费力气 / 徒劳</div>
+            <div class="card-hint">To labour in vain</div>
+        </a>
+        
+        <a href="idiom-70.html" class="idiom-card" data-category="труд-и-лень" data-search="под лежачий камень вода не течёт 不劳无获 / 天上不掉馅饼">
+            <div class="card-number">#70</div>
+            <div class="card-idiom">Под лежачий камень вода не течёт</div>
+            <div class="card-category">Труд и лень</div>
+            <div class="card-meaning">不劳无获 / 天上不掉馅饼</div>
+            <div class="card-hint">Nothing comes to those who wait</div>
+        </a>
+        
+        <a href="idiom-71.html" class="idiom-card" data-category="труд-и-лень" data-search="набить руку 熟能生巧">
+            <div class="card-number">#71</div>
+            <div class="card-idiom">Набить руку</div>
+            <div class="card-category">Труд и лень</div>
+            <div class="card-meaning">熟能生巧</div>
+            <div class="card-hint">Practice makes perfect</div>
+        </a>
+        
+        <a href="idiom-72.html" class="idiom-card" data-category="правда-и-ложь" data-search="втирать очки 蒙骗 / 混淆视听">
+            <div class="card-number">#72</div>
+            <div class="card-idiom">Втирать очки</div>
+            <div class="card-category">Правда и ложь</div>
+            <div class="card-meaning">蒙骗 / 混淆视听</div>
+            <div class="card-hint">To pull the wool over one's eyes</div>
+        </a>
+        
+        <a href="idiom-73.html" class="idiom-card" data-category="правда-и-ложь" data-search="на воре шапка горит 做贼心虚">
+            <div class="card-number">#73</div>
+            <div class="card-idiom">На воре шапка горит</div>
+            <div class="card-category">Правда и ложь</div>
+            <div class="card-meaning">做贼心虚</div>
+            <div class="card-hint">A guilty conscience betrays itself</div>
+        </a>
+        
+        <a href="idiom-74.html" class="idiom-card" data-category="правда-и-ложь" data-search="крокодиловы слёзы 鳄鱼的眼泪">
+            <div class="card-number">#74</div>
+            <div class="card-idiom">Крокодиловы слёзы</div>
+            <div class="card-category">Правда и ложь</div>
+            <div class="card-meaning">鳄鱼的眼泪</div>
+            <div class="card-hint">Crocodile tears</div>
+        </a>
+        
+        <a href="idiom-75.html" class="idiom-card" data-category="правда-и-ложь" data-search="рыльце в пуху 有把柄 / 不清白">
+            <div class="card-number">#75</div>
+            <div class="card-idiom">Рыльце в пуху</div>
+            <div class="card-category">Правда и ложь</div>
+            <div class="card-meaning">有把柄 / 不清白</div>
+            <div class="card-hint">To have a skeleton in the closet</div>
+        </a>
+        
+        <a href="idiom-76.html" class="idiom-card" data-category="правда-и-ложь" data-search="шито белыми нитками 破绽百出 / 欲盖弥彰">
+            <div class="card-number">#76</div>
+            <div class="card-idiom">Шито белыми нитками</div>
+            <div class="card-category">Правда и ложь</div>
+            <div class="card-meaning">破绽百出 / 欲盖弥彰</div>
+            <div class="card-hint">An obvious cover-up</div>
+        </a>
+        
+        <a href="idiom-77.html" class="idiom-card" data-category="правда-и-ложь" data-search="ясен пень 明摆着 / 显而易见">
+            <div class="card-number">#77</div>
+            <div class="card-idiom">Ясен пень</div>
+            <div class="card-category">Правда и ложь</div>
+            <div class="card-meaning">明摆着 / 显而易见</div>
+            <div class="card-hint">It's as clear as day</div>
+        </a>
+        
+        <a href="idiom-78.html" class="idiom-card" data-category="правда-и-ложь" data-search="черным по белому 白纸黑字 / 清清楚楚">
+            <div class="card-number">#78</div>
+            <div class="card-idiom">Черным по белому</div>
+            <div class="card-category">Правда и ложь</div>
+            <div class="card-meaning">白纸黑字 / 清清楚楚</div>
+            <div class="card-hint">In black and white</div>
+        </a>
+        
+        <a href="idiom-79.html" class="idiom-card" data-category="дружба-и-отношения" data-search="водой не разольёшь 亲密无间 / 形影不离">
+            <div class="card-number">#79</div>
+            <div class="card-idiom">Водой не разольёшь</div>
+            <div class="card-category">Дружба и отношения</div>
+            <div class="card-meaning">亲密无间 / 形影不离</div>
+            <div class="card-hint">Inseparable</div>
+        </a>
+        
+        <a href="idiom-80.html" class="idiom-card" data-category="дружба-и-отношения" data-search="как кошка с собакой 水火不容 / 经常吵架">
+            <div class="card-number">#80</div>
+            <div class="card-idiom">Как кошка с собакой</div>
+            <div class="card-category">Дружба и отношения</div>
+            <div class="card-meaning">水火不容 / 经常吵架</div>
+            <div class="card-hint">Like cat and dog</div>
+        </a>
+        
+        <a href="idiom-81.html" class="idiom-card" data-category="дружба-и-отношения" data-search="на ножах 剑拔弩张 / 势不两立">
+            <div class="card-number">#81</div>
+            <div class="card-idiom">На ножах</div>
+            <div class="card-category">Дружба и отношения</div>
+            <div class="card-meaning">剑拔弩张 / 势不两立</div>
+            <div class="card-hint">At daggers drawn</div>
+        </a>
+        
+        <a href="idiom-82.html" class="idiom-card" data-category="дружба-и-отношения" data-search="шапочное знакомство 泛泛之交 / 点头之交">
+            <div class="card-number">#82</div>
+            <div class="card-idiom">Шапочное знакомство</div>
+            <div class="card-category">Дружба и отношения</div>
+            <div class="card-meaning">泛泛之交 / 点头之交</div>
+            <div class="card-hint">A nodding acquaintance</div>
+        </a>
+        
+        <a href="idiom-83.html" class="idiom-card" data-category="количество" data-search="капля в море 沧海一粟 / 杯水车薪">
+            <div class="card-number">#83</div>
+            <div class="card-idiom">Капля в море</div>
+            <div class="card-category">Количество</div>
+            <div class="card-meaning">沧海一粟 / 杯水车薪</div>
+            <div class="card-hint">A drop in the ocean</div>
+        </a>
+        
+        <a href="idiom-84.html" class="idiom-card" data-category="количество" data-search="гол как сокол 一贫如洗 / 身无分文">
+            <div class="card-number">#84</div>
+            <div class="card-idiom">Гол как сокол</div>
+            <div class="card-category">Количество</div>
+            <div class="card-meaning">一贫如洗 / 身无分文</div>
+            <div class="card-hint">Penniless / flat broke</div>
+        </a>
+        
+        <a href="idiom-85.html" class="idiom-card" data-category="количество" data-search="как грибы после дождя 雨后春笋 / 大量涌现">
+            <div class="card-number">#85</div>
+            <div class="card-idiom">Как грибы после дождя</div>
+            <div class="card-category">Количество</div>
+            <div class="card-meaning">雨后春笋 / 大量涌现</div>
+            <div class="card-hint">To spring up like mushrooms</div>
+        </a>
+        
+        <a href="idiom-86.html" class="idiom-card" data-category="количество" data-search="цены нет 无价之宝 / 好极了">
+            <div class="card-number">#86</div>
+            <div class="card-idiom">Цены нет</div>
+            <div class="card-category">Количество</div>
+            <div class="card-meaning">无价之宝 / 好极了</div>
+            <div class="card-hint">Priceless / second to none</div>
+        </a>
+        
+        <a href="idiom-87.html" class="idiom-card" data-category="количество" data-search="с гулькин нос 少得可怜 / 微不足道">
+            <div class="card-number">#87</div>
+            <div class="card-idiom">С гулькин нос</div>
+            <div class="card-category">Количество</div>
+            <div class="card-meaning">少得可怜 / 微不足道</div>
+            <div class="card-hint">Next to nothing</div>
+        </a>
+        
+        <a href="idiom-88.html" class="idiom-card" data-category="качество" data-search="как две капли воды 一模一样">
+            <div class="card-number">#88</div>
+            <div class="card-idiom">Как две капли воды</div>
+            <div class="card-category">Качество</div>
+            <div class="card-meaning">一模一样</div>
+            <div class="card-hint">As like as two peas</div>
+        </a>
+        
+        <a href="idiom-89.html" class="idiom-card" data-category="качество" data-search="дёшево и сердито 物美价廉 / 简便有效">
+            <div class="card-number">#89</div>
+            <div class="card-idiom">Дёшево и сердито</div>
+            <div class="card-category">Качество</div>
+            <div class="card-meaning">物美价廉 / 简便有效</div>
+            <div class="card-hint">Cheap and cheerful</div>
+        </a>
+        
+        <a href="idiom-90.html" class="idiom-card" data-category="качество" data-search="пальчики оближешь 赞不绝口 / 美味至极">
+            <div class="card-number">#90</div>
+            <div class="card-idiom">Пальчики оближешь</div>
+            <div class="card-category">Качество</div>
+            <div class="card-meaning">赞不绝口 / 美味至极</div>
+            <div class="card-hint">Finger-licking good</div>
+        </a>
+        
+        <a href="idiom-91.html" class="idiom-card" data-category="качество" data-search="ни рыба ни мясо 不伦不类 / 四不像">
+            <div class="card-number">#91</div>
+            <div class="card-idiom">Ни рыба ни мясо</div>
+            <div class="card-category">Качество</div>
+            <div class="card-meaning">不伦不类 / 四不像</div>
+            <div class="card-hint">Neither fish nor fowl</div>
+        </a>
+        
+        <a href="idiom-92.html" class="idiom-card" data-category="семья" data-search="яблоко от яблони недалеко падает 有其父必有其子">
+            <div class="card-number">#92</div>
+            <div class="card-idiom">Яблоко от яблони недалеко падает</div>
+            <div class="card-category">Семья</div>
+            <div class="card-meaning">有其父必有其子</div>
+            <div class="card-hint">The apple doesn't fall far from the tree</div>
+        </a>
+        
+        <a href="idiom-93.html" class="idiom-card" data-category="семья" data-search="выносить сор из избы 家丑外扬">
+            <div class="card-number">#93</div>
+            <div class="card-idiom">Выносить сор из избы</div>
+            <div class="card-category">Семья</div>
+            <div class="card-meaning">家丑外扬</div>
+            <div class="card-hint">To wash one's dirty linen in public</div>
+        </a>
+        
+        <a href="idiom-94.html" class="idiom-card" data-category="время-и-судьба" data-search="не всё коту масленица 好景不长 / 不会一直顺">
+            <div class="card-number">#94</div>
+            <div class="card-idiom">Не всё коту масленица</div>
+            <div class="card-category">Время и судьба</div>
+            <div class="card-meaning">好景不长 / 不会一直顺</div>
+            <div class="card-hint">The honeymoon won't last</div>
+        </a>
+        
+        <a href="idiom-95.html" class="idiom-card" data-category="время-и-судьба" data-search="как снег на голову 突如其来 / 晴天霹雳">
+            <div class="card-number">#95</div>
+            <div class="card-idiom">Как снег на голову</div>
+            <div class="card-category">Время и судьба</div>
+            <div class="card-meaning">突如其来 / 晴天霹雳</div>
+            <div class="card-hint">Out of the blue</div>
+        </a>
+        
+        <a href="idiom-96.html" class="idiom-card" data-category="время-и-судьба" data-search="кривая вывезет 车到山前必有路 / 运气好">
+            <div class="card-number">#96</div>
+            <div class="card-idiom">Кривая вывезет</div>
+            <div class="card-category">Время и судьба</div>
+            <div class="card-meaning">车到山前必有路 / 运气好</div>
+            <div class="card-hint">Things will work out</div>
+        </a>
+        
+        <a href="idiom-97.html" class="idiom-card" data-category="время-и-судьба" data-search="чем чёрт не шутит 凡事皆有可能 / 不妨一试">
+            <div class="card-number">#97</div>
+            <div class="card-idiom">Чем чёрт не шутит</div>
+            <div class="card-category">Время и судьба</div>
+            <div class="card-meaning">凡事皆有可能 / 不妨一试</div>
+            <div class="card-hint">Stranger things have happened</div>
+        </a>
+        
+        <a href="idiom-98.html" class="idiom-card" data-category="чувства" data-search="быть на седьмом небе 欣喜若狂 / 飘飘欲仙">
+            <div class="card-number">#98</div>
+            <div class="card-idiom">Быть на седьмом небе</div>
+            <div class="card-category">Чувства</div>
+            <div class="card-meaning">欣喜若狂 / 飘飘欲仙</div>
+            <div class="card-hint">To be on cloud nine</div>
+        </a>
+        
+        <a href="idiom-99.html" class="idiom-card" data-category="чувства" data-search="отлегло от сердца 如释重负 / 一块石头落地">
+            <div class="card-number">#99</div>
+            <div class="card-idiom">Отлегло от сердца</div>
+            <div class="card-category">Чувства</div>
+            <div class="card-meaning">如释重负 / 一块石头落地</div>
+            <div class="card-hint">A weight lifted off one's chest</div>
+        </a>
+        
+        <a href="idiom-100.html" class="idiom-card" data-category="чувства" data-search="душа ушла в пятки 魂飞魄散 / 吓得半死">
+            <div class="card-number">#100</div>
+            <div class="card-idiom">Душа ушла в пятки</div>
+            <div class="card-category">Чувства</div>
+            <div class="card-meaning">魂飞魄散 / 吓得半死</div>
+            <div class="card-hint">Scared stiff / one's heart sank</div>
+        </a>
+        
+</div>
+
+<div class="no-results" id="noResults">
+    没有找到匹配的习语 😅
+</div>
+
+<footer class="page-footer">
+    <p>涛子办事处 &bull; 俄语习语学习工具</p>
+</footer>
+
+<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+// Search & Filter
+function filterIdioms() {
+    const q = document.getElementById('searchInput').value.toLowerCase().trim();
+    const cards = document.querySelectorAll('.idiom-card');
+    const activeCat = document.querySelector('.category-tag.active:not([data-cat="all"])');
+    let visible = false;
+
+    cards.forEach(c => {
+        const searchText = c.dataset.search;
+        const cats = c.dataset.category.split(' ');
+        const matchSearch = !q || searchText.includes(q);
+        const matchCat = !activeCat || cats.includes(activeCat.dataset.cat);
+
+        if (matchSearch && matchCat) {
+            c.style.display = 'block';
+            visible = true;
+        } else {
+            c.style.display = 'none';
+        }
+    });
+
+    document.getElementById('noResults').style.display = visible ? 'none' : 'block';
+}
+
+function filterByCategory(cat, el) {
+    document.querySelectorAll('.category-tag').forEach(t => t.classList.remove('active'));
+    el.classList.add('active');
+    filterIdioms();
+}
+
+// Back to top
+window.addEventListener('scroll', function() {
+    document.getElementById('backToTop').classList.toggle('visible', window.scrollY > 300);
+});
+</script>
+
+</body>
+</html>
