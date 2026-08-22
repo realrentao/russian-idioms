@@ -17,6 +17,7 @@ import sys
 import re
 import asyncio
 import edge_tts
+from io import BytesIO
 
 # Ensure UTF-8
 if sys.stdout.encoding != 'utf-8':
@@ -25,6 +26,47 @@ if sys.stdout.encoding != 'utf-8':
 # Import data
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from russian_idioms_data import IDIOMS
+
+# ---------------------------------------------------------------------------
+# Brand logo: 涛子办事处 piano illustration (弹钢琴插画)
+# Inlined as base64 so pages stay self-contained (no external assets).
+# ---------------------------------------------------------------------------
+LOGO_SRC = "D:/阿拉伯语材料/每天5个阿拉伯语单词/40/assets/logo-piano.jpg"
+LOGO_SIZE = 120  # px, square; rendered as a circle
+
+def _load_logo_b64():
+    """Resize the piano illustration to LOGO_SIZE and return base64 JPEG."""
+    try:
+        from PIL import Image
+    except ImportError:
+        return None
+    if not os.path.exists(LOGO_SRC):
+        return None
+    try:
+        im = Image.open(LOGO_SRC).convert("RGB")
+        im = im.resize((LOGO_SIZE, LOGO_SIZE), Image.LANCZOS)
+        buf = BytesIO()
+        im.save(buf, format="JPEG", quality=85, optimize=True)
+        return base64.b64encode(buf.getvalue()).decode("ascii")
+    except Exception:
+        return None
+
+_LOGO_B64 = _load_logo_b64()
+
+def logo_img(size=LOGO_SIZE, extra_class=""):
+    """Return an <img> tag for the brand logo, or empty string if unavailable."""
+    if not _LOGO_B64:
+        return ""
+    return (f'<img class="brand-logo {extra_class}" src="data:image/jpeg;base64,{_LOGO_B64}" '
+            f'width="{size}" height="{size}" alt="涛子办事处" />')
+
+def brand_markup():
+    """Footer brand: piano logo + 文字. Falls back to text if logo missing."""
+    if _LOGO_B64:
+        return (f'<div class="brand">{logo_img(64, "brand-logo-sm")}'
+                f'<span class="brand-text">logo涛子办事处</span></div>')
+    return '<p>logo涛子办事处</p>'
+
 
 OUTPUT_DIR = os.path.dirname(os.path.abspath(__file__))
 AUDIO_DIR = os.path.join(OUTPUT_DIR, "audio")
@@ -132,6 +174,38 @@ body {
     text-align: center;
     padding: 24px 20px;
     font-size: 0.85rem;
+}
+
+/* Brand logo (piano illustration) */
+.brand-logo {
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.35);
+    border: 3px solid var(--gold, #E8B84B);
+    background: #fff;
+    display: inline-block;
+    vertical-align: middle;
+}
+.brand-logo-header {
+    width: 96px;
+    height: 96px;
+    margin: 0 auto 14px;
+}
+.brand {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+}
+.brand-logo-sm {
+    width: 44px;
+    height: 44px;
+    border-width: 2px;
+}
+.brand-text {
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    font-size: 1rem;
 }
 
 /* Back to Top */
@@ -1274,6 +1348,7 @@ def generate_index_html():
 <div class="tricolor-bar"></div>
 
 <header class="main-header">
+    {logo_img(96, "brand-logo-header")}
     <h1><span class="flag-icon flag-ru">{svg_flag_ru()}</span> 俄语习语</h1>
     <div class="subtitle">Русские фразеологизмы и поговорки</div>
     <div class="subtitle-cn">常用俄语习语，轻松掌握地道表达</div>
@@ -1301,7 +1376,7 @@ def generate_index_html():
 </div>
 
 <footer class="page-footer">
-    <p>logo涛子办事处</p>
+    {brand_markup()}
 </footer>
 
 <button class="back-to-top" id="backToTop" onclick="window.scrollTo({{top:0,behavior:'smooth'}})">↑</button>
@@ -1476,6 +1551,7 @@ def generate_idiom_page(idiom):
 <div class="tricolor-bar"></div>
 
 <header class="main-header" style="padding:50px 20px 30px;">
+    {logo_img(96, "brand-logo-header")}
     <h1 style="font-size:1.8rem;"><span class="flag-icon flag-ru">{svg_flag_ru()}</span> 俄语习语</h1>
     <div class="subtitle" style="font-size:0.95rem;">Русские фразеологизмы и поговорки</div>
 </header>
@@ -1557,7 +1633,7 @@ def generate_idiom_page(idiom):
 </div>
 
 <footer class="page-footer">
-    <p>logo涛子办事处 · #{iid:02d}/{len(IDIOMS)}</p>
+    {brand_markup()}
 </footer>
 
 <button class="back-to-top" id="backToTop" onclick="window.scrollTo({{top:0,behavior:'smooth'}})">↑</button>
